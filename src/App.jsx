@@ -23,10 +23,17 @@ function App() {
     const allDice = dieValue.map((oneDie) => {
         return (<Die value={oneDie}/>)
     })
+
+    const rollAllDice = () => {
+        setDieValue(prevValue => prevValue.map(onePrevValue => { 
+            return createARandomNr()
+        }))
+    }
     
     return (
     <>
     <main>
+        <button onClick={rollAllDice}>click</button>
         <div className="big-box">
             <div className="dice-section">
                 {allDice}
