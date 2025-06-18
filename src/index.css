@@ -18,23 +18,23 @@ div#root{
 
 
 main {
-    background-color: #F5F5F5;
-    height: 100%;
-    border-radius: 5px;  
+  background-color: #F5F5F5;
+  height: 100%;
+  border-radius: 5px;  
 }
 
 .big-box{
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .dice-section{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    margin: 1rem;
-    gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 1rem;
+  gap: 1rem;
 }
 
 .oneDie{

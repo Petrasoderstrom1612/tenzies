@@ -1,29 +1,37 @@
-import { useState } from 'react'
+import React from 'react'
 import Die from "./components/Die"
 
 
+const createARandomNr = () => {
+return Math.ceil(Math.random() * 6)    
+} 
+
 function App() {
-    const createARandomNr = () => {
-    return Math.ceil(Math.random() * 6)    
-    } 
+    const [dieValue, setDieValue] = React.useState([
+        createARandomNr(),
+        createARandomNr(),
+        createARandomNr(),
+        createARandomNr(),
+        createARandomNr(),
+        createARandomNr(),
+        createARandomNr(),
+        createARandomNr(),
+        createARandomNr(),
+        createARandomNr(),
+    ])
+
+    const allDice = dieValue.map((oneDie) => {
+        return (<Die value={oneDie}/>)
+    })
     
     return (
     <>
     <main>
-    <div className="big-box">
-    <div className="dice-section">
-    <Die value={createARandomNr()}/>
-    <Die value={createARandomNr()}/>
-    <Die value={createARandomNr()}/>
-    <Die value={createARandomNr()}/>
-    <Die value={createARandomNr()}/>
-    <Die value={createARandomNr()}/>
-    <Die value={createARandomNr()}/>
-    <Die value={createARandomNr()}/>
-    <Die value={createARandomNr()}/>
-    <Die value={createARandomNr()}/>
-    </div>
-    </div>
+        <div className="big-box">
+            <div className="dice-section">
+                {allDice}
+            </div>
+        </div>
     </main>
     </>
     )
