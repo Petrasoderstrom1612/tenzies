@@ -41,18 +41,18 @@ function App() {
 
     ])
 
-    const toggleHold = (index) => {
+    const toggleHold = (index) => { //loop through all .isHeld from state and toggle the one clicked object
         setDieValue(prevState => prevState.map((oneDie,i) => {
             return index ===  i ? {...oneDie, isHeld: !oneDie.isHeld} : oneDie
         }))
     }
 
-    const allDice = dieValue.map((oneDie, index) => {
+    const allDice = dieValue.map((oneDie, index) => { //toggle through the state array and extract data - the properties + key + add props function
         return (<Die key={index} value={oneDie.value} isHeld={oneDie.isHeld} toggleHold={() => toggleHold(index)} />)
     })
 
 
-    const rollAllDice = () => {
+    const rollAllDice = () => { //use state setter via loop - if .isHeld property, do nothing, otherwise on each loop keep the properties and change value to CreateARandomNr function
         setDieValue(prevValue => prevValue.map(oneDie => { 
            if (!oneDie.isHeld) {
             return {...oneDie, value: createARandomNr()}

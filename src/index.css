@@ -50,3 +50,7 @@ main {
 .number{
   font-size:1.8rem;
 }
+
+.green-background{
+  background-color: green;
+}
