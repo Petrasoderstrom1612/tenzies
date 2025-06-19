@@ -14,27 +14,27 @@ function App() {
         {value: createARandomNr(),
          isHeld: false,   
         },
-        {value: createARandomNr(),
-         isHeld: false,   
-        },
-        {value: createARandomNr(),
-         isHeld: false,   
-        },
-        {value: createARandomNr(),
-         isHeld: false,   
-        },
-        {value: createARandomNr(),
-         isHeld: false,   
-        },
-        {value: createARandomNr(),
-         isHeld: false,   
-        },
-        {value: createARandomNr(),
-         isHeld: false,   
-        },
-        {value: createARandomNr(),
-         isHeld: false,   
-        },
+        // {value: createARandomNr(),
+        //  isHeld: false,   
+        // },
+        // {value: createARandomNr(),
+        //  isHeld: false,   
+        // },
+        // {value: createARandomNr(),
+        //  isHeld: false,   
+        // },
+        // {value: createARandomNr(),
+        //  isHeld: false,   
+        // },
+        // {value: createARandomNr(),
+        //  isHeld: false,   
+        // },
+        // {value: createARandomNr(),
+        //  isHeld: false,   
+        // },
+        // {value: createARandomNr(),
+        //  isHeld: false,   
+        // },
         {value: createARandomNr(),
          isHeld: false,   
         },
@@ -61,6 +61,14 @@ function App() {
            }
         }))
     }
+
+    const startNewGame = () => {
+        if(dieValue.every(die => die.isHeld)){
+            setDieValue(dieValue.map(oneDie => ({...oneDie, isHeld: false})))
+        }
+    }
+
+    startNewGame()
     
     return (
     <>
