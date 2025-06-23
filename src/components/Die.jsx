@@ -4,7 +4,7 @@ const Die = (props) => {
 
     console.log(props)
     return(
-        <div className={`oneDie ${props.isHeld && "green-background"}`} onClick={() => props.toggleHold()} role="button"><p className="number">{props.value}</p></div>
+        <button className={`oneDie ${props.isHeld && "green-background"}`} onClick={() => props.toggleHold()}>{props.value}</button>
     )
 }
 
