@@ -2,44 +2,21 @@ import React from 'react'
 import Die from "./components/Die"
 
 
-const createARandomNr = () => {
-return Math.ceil(Math.random() * 6)    
-} 
+
+
+const createOneDie = () => {
+    return {
+        value: Math.ceil(Math.random() * 6),
+        isHeld: false, 
+    }
+}
+
+const createAllDice = () => {
+    return Array.from({length: 10}, createOneDie)
+}
 
 function App() {
-    const [dieValue, setDieValue] = React.useState([
-        {value: createARandomNr(),
-         isHeld: false,   
-        },
-        {value: createARandomNr(),
-         isHeld: false,   
-        },
-        {value: createARandomNr(),
-         isHeld: false,   
-        },
-        {value: createARandomNr(),
-         isHeld: false,   
-        },
-        {value: createARandomNr(),
-         isHeld: false,   
-        },
-        {value: createARandomNr(),
-         isHeld: false,   
-        },
-        {value: createARandomNr(),
-         isHeld: false,   
-        },
-        {value: createARandomNr(),
-         isHeld: false,   
-        },
-        {value: createARandomNr(),
-         isHeld: false,   
-        },
-        {value: createARandomNr(),
-         isHeld: false,   
-        },
-
-    ])
+    const [dieValue, setDieValue] = React.useState(createAllDice)
 
     const toggleHold = (index) => { //loop through all .isHeld from state and toggle the one clicked object
         setDieValue(prevState => prevState.map((oneDie,i) => {
