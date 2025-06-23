@@ -32,7 +32,7 @@ function App() {
     const rollAllDice = () => { //use state setter via loop - if .isHeld property, do nothing, otherwise on each loop keep the properties and change value to CreateARandomNr function
         setDieValue(prevValue => prevValue.map(oneDie => { 
            if (!oneDie.isHeld) {
-            return {...oneDie, value: createARandomNr()}
+            return {...oneDie, value: Math.ceil(Math.random() * 6)}
            } else{
             return oneDie
            }
