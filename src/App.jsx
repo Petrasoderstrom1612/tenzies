@@ -73,7 +73,7 @@ function App() {
     return (
     <>
     <main>
-        <button onClick={rollAllDice}>ROLL DICE</button>
+        <button onClick={rollAllDice} className="roll-dice">ROLL DICE</button>
         <div className="big-box">
             <div className="dice-section">
                 {allDice}
