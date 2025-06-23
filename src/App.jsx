@@ -12,7 +12,7 @@ const createOneDie = () => {
 }
 
 const createAllDice = () => {
-    return Array.from({length: 10}, createOneDie)
+    return Array.from({length: 10}, () => createOneDie()) //you need {} to declare length. It says create an array of 10 elements and pass a function to call on every element of the array
 }
 
 function App() {
