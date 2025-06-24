@@ -2,17 +2,13 @@ import React from 'react'
 import Die from "./components/Die"
 
 
-
-
-const createOneDie = () => {
-    return {
-        value: Math.ceil(Math.random() * 6),
-        isHeld: false, 
-    }
-}
-
-const createAllDice = () => {
-    return Array.from({length: 10}, () => createOneDie()) //you need {} to declare length. It says create an array of 10 elements and pass a function to call on every element of the array
+const createAllDice = () => { //create an array of objects
+    return Array.from({length: 10}, () => (
+        {
+            value: Math.ceil(Math.random() * 6), 
+            isHeld: false, 
+        }
+    )) //you need {} to declare length. It says create an array of 10 elements and pass a function to call on every element of the array
 }
 
 function App() {
