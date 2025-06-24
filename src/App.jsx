@@ -18,24 +18,20 @@ console.log("id",createAllDice())
 function App() {
     const [dieValue, setDieValue] = React.useState(createAllDice)
 
-    const toggleHold = (index) => { //loop through all .isHeld from state and toggle the one clicked object
+    const toggleHold = (index) => { //loop through the array of objects from state and check each .isHeld and toggle the one clicked object's .isHeld
         setDieValue(prevState => prevState.map((oneDie,i) => {
             return index ===  i ? {...oneDie, isHeld: !oneDie.isHeld} : oneDie
         }))
     }
 
-    const allDice = dieValue.map((oneDie, index) => { //toggle through the state array and extract data - the properties + key + add props function
+    const allDice = dieValue.map((oneDie, index) => { //map through the state array and extract data - the properties + key + add props function
         return (<Die key={index} value={oneDie.value} isHeld={oneDie.isHeld} toggleHold={toggleHold} index={index} />)
     })
 
 
-    const rollAllDice = () => { //use state setter via loop - if .isHeld property, do nothing, otherwise on each loop keep the properties and change value to CreateARandomNr function
+    const rollDice = () => { //use state setter via loop - if .isHeld property, do nothing, otherwise on each loop we're really just updating the `value` property of the die object
         setDieValue(prevValue => prevValue.map(oneDie => { 
-           if (!oneDie.isHeld) {
-            return {...oneDie, value: Math.ceil(Math.random() * 6)}
-           } else{
-            return oneDie
-           }
+           !oneDie.isHeld ? {...oneDie, value: Math.ceil(Math.random() * 6)} :  oneDie
         }))
     }
 
@@ -54,7 +50,7 @@ function App() {
             <div className="dice-section">
                 {allDice}
             </div>
-            <button onClick={rollAllDice} className="roll-dice">Roll</button>
+            <button onClick={rollDice} className="roll-dice">Roll</button>
         </div>
     </main>
     </>
