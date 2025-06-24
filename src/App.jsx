@@ -1,5 +1,6 @@
 import React from 'react'
 import Die from "./components/Die"
+import { nanoid } from "nanoid"
 
 
 const createAllDice = () => { //create an array of objects
@@ -7,9 +8,11 @@ const createAllDice = () => { //create an array of objects
         {
             value: Math.ceil(Math.random() * 6), 
             isHeld: false, 
+            id: nanoid()
         }
     )) //you need {} to declare length. It says create an array of 10 elements and pass a function to call on every element of the array
 }
+
 
 function App() {
     const [dieValue, setDieValue] = React.useState(createAllDice)
