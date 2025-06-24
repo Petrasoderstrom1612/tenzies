@@ -13,6 +13,7 @@ const createAllDice = () => { //create an array of objects
     )) //you need {} to declare length. It says create an array of 10 elements and pass a function to call on every element of the array
 }
 
+console.log("id",createAllDice())
 
 function App() {
     const [dieValue, setDieValue] = React.useState(createAllDice)
@@ -24,7 +25,7 @@ function App() {
     }
 
     const allDice = dieValue.map((oneDie, index) => { //toggle through the state array and extract data - the properties + key + add props function
-        return (<Die key={index} value={oneDie.value} isHeld={oneDie.isHeld} toggleHold={() => toggleHold(index)} />)
+        return (<Die key={index} value={oneDie.value} isHeld={oneDie.isHeld} toggleHold={toggleHold} index={index} />)
     })
 
 
