@@ -18,18 +18,13 @@ console.log("id",createAllDice())
 function App() {
     const [dieValue, setDieValue] = React.useState(createAllDice)
 
-    const toggleHold = (index) => { //loop through the array of objects from state and check each .isHeld and toggle the one clicked object's .isHeld
+    const toggleHold = (index) => { //loop through the array of objects from state, if the clicked index is the same as index of the object in state, toggle its held property
         setDieValue(prevState => prevState.map((oneDie,i) => {
             return index ===  i ? {...oneDie, isHeld: !oneDie.isHeld} : oneDie
         }))
-    }
-
-    const allDice = dieValue.map((oneDie, index) => { //map through the state array and extract data - the properties + key + add props function
-        return (<Die key={index} value={oneDie.value} isHeld={oneDie.isHeld} toggleHold={toggleHold} index={index} />)
-    })
-
-
-    const rollDice = () => { //use state setter via loop - if .isHeld property, do nothing, otherwise on each loop we're really just updating the `value` property of the die object
+    }    
+    
+    const rollDice = () => {   //loop through the array of objects from state and check each .isHeld and toggle the one clicked object's .isHeld
         setDieValue(prevValue => prevValue.map(oneDie => { 
            !oneDie.isHeld ? {...oneDie, value: Math.ceil(Math.random() * 6)} :  oneDie
         }))
@@ -40,13 +35,19 @@ function App() {
             setDieValue(dieValue.map(oneDie => ({...oneDie, isHeld: false})))
         }
     }
-
+    
     startNewGame()
+
+    const allDice = dieValue.map((oneDie, index) => { //map through the state array and extract data - the properties + key + add props function
+        return (<Die key={index} value={oneDie.value} isHeld={oneDie.isHeld} toggleHold={toggleHold} index={index} />)
+    })
     
     return (
     <>
     <main>
         <div className="big-box">
+            <h1 className="title">Tenzies</h1>
+            <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
             <div className="dice-section">
                 {allDice}
             </div>
