@@ -39,7 +39,7 @@ function App() {
     startNewGame()
 
     const allDice = dieValue.map((oneDie, index) => { //map through the state array and extract data - the properties + key + add props function
-        return (<Die key={index} value={oneDie.value} isHeld={oneDie.isHeld} toggleHold={() => toggleHold(oneDie.id)}/>)
+        return (<Die key={index} value={oneDie.value} isHeld={oneDie.isHeld} toggleHold={() => toggleHold(oneDie.id)}/>) //id comes from dieValue
     })
     
     return (
