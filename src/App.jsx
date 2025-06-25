@@ -18,9 +18,9 @@ console.log("id",createAllDice())
 function App() {
     const [dieValue, setDieValue] = React.useState(createAllDice)
 
-    const toggleHold = (index) => { //loop through the array of objects from state, if the clicked index is the same as index of the object in state, toggle its held property
-        setDieValue(prevState => prevState.map((oneDie,i) => {
-            return index ===  i ? {...oneDie, isHeld: !oneDie.isHeld} : oneDie
+    const toggleHold = (id) => { //loop through the array of objects from state, if the clicked index is the same as index of the object in state, toggle its held property
+        setDieValue(prevState => prevState.map((oneDie) => {
+            return id ===  oneDie.id ? {...oneDie, isHeld: !oneDie.isHeld} : oneDie
         }))
     }    
     
@@ -39,7 +39,7 @@ function App() {
     startNewGame()
 
     const allDice = dieValue.map((oneDie, index) => { //map through the state array and extract data - the properties + key + add props function
-        return (<Die key={index} value={oneDie.value} isHeld={oneDie.isHeld} toggleHold={toggleHold} index={index} />)
+        return (<Die key={index} value={oneDie.value} isHeld={oneDie.isHeld} toggleHold={() => toggleHold(oneDie.id)}/>)
     })
     
     return (
