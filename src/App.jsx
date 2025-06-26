@@ -25,13 +25,13 @@ function App() {
     }    
     
     const rollDice = () => {   //loop through the array of objects from state and check each .isHeld and toggle the one clicked object's .isHeld
-        setDieValue(prevValue => prevValue.map(oneDie => { 
-           !oneDie.isHeld ? {...oneDie, value: Math.ceil(Math.random() * 6)} :  oneDie
+        setDieValue(prevValue => prevValue.map(oneDie => { //if you want to skip curlies, remove return too
+           return !oneDie.isHeld ? {...oneDie, value: Math.ceil(Math.random() * 6)} :  oneDie
         }))
     }
 
     const startNewGame = () => { //when the last die is clicked to be held, swap all back to isHeld: false
-        if(dieValue.every(die => die.isHeld)){
+        if(dieValue.every(die => die.isHeld) && dieValue.every(die => die.value === dieValue[0].value)){
             setDieValue(dieValue.map(oneDie => ({...oneDie, isHeld: false})))
         }
     }
