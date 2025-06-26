@@ -56,7 +56,9 @@ main {
 
 .roll-dice{
   height: 50px;
-  width: 100px;
+  width: auto;
+  white-space: nowrap; /* no break of words on two lines */
+  padding: 10px 20px;
   border: none;
   border-radius: 6px;
   background-color: #5035FF;

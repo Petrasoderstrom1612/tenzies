@@ -16,30 +16,33 @@ const createAllDice = () => { //create an array of objects
 console.log("id",createAllDice())
 
 function App() {
-    const [dieValue, setDieValue] = React.useState(createAllDice)
+    const [dice, setdice] = React.useState(createAllDice)
 
     const toggleHold = (id) => { //loop through the array of objects from state, if the clicked index is the same as index of the object in state, toggle its held property
-        setDieValue(prevState => prevState.map((oneDie) => {
+        setdice(prevState => prevState.map((oneDie) => {
             return id ===  oneDie.id ? {...oneDie, isHeld: !oneDie.isHeld} : oneDie
         }))
     }    
     
     const rollDice = () => {   //loop through the array of objects from state and check each .isHeld and toggle the one clicked object's .isHeld
-        setDieValue(prevValue => prevValue.map(oneDie => { //if you want to skip curlies, remove return too
+        setdice(prevValue => prevValue.map(oneDie => { //if you want to skip curlies, remove return too
            return !oneDie.isHeld ? {...oneDie, value: Math.ceil(Math.random() * 6)} :  oneDie
         }))
     }
 
+    let gameWon = dice.every(die => die.isHeld) && dice.every(die => die.value === dice[0].value)
     const startNewGame = () => { //when the last die is clicked to be held, swap all back to isHeld: false
-        if(dieValue.every(die => die.isHeld) && dieValue.every(die => die.value === dieValue[0].value)){
-            setDieValue(dieValue.map(oneDie => ({...oneDie, isHeld: false})))
+        if(gameWon){
+            setdice(dice.map(oneDie => ({...oneDie, isHeld: false})))
         }
     }
     
     startNewGame()
 
-    const allDice = dieValue.map((oneDie, index) => { //map through the state array and extract data - the properties + key + add props function
-        return (<Die key={index} value={oneDie.value} isHeld={oneDie.isHeld} toggleHold={() => toggleHold(oneDie.id)}/>) //id comes from dieValue
+    let btnName = startNewGame
+
+    const allDice = dice.map((oneDie, index) => { //map through the state array and extract data - the properties + key + add props function
+        return (<Die key={index} value={oneDie.value} isHeld={oneDie.isHeld} toggleHold={() => toggleHold(oneDie.id)}/>) //id comes from dice
     })
     
     return (
@@ -51,7 +54,7 @@ function App() {
             <div className="dice-section">
                 {allDice}
             </div>
-            <button onClick={rollDice} className="roll-dice">Roll</button>
+            <button onClick={rollDice} className="roll-dice">{!gameWon ? "New game" : "Roll"}</button>
         </div>
     </main>
     </>
