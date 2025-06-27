@@ -5,7 +5,7 @@ import DropConfetti from './components/DropConfetti'
 
 
 const createAllDice = () => { //create an array of objects
-    return Array.from({length: 2}, () => (
+    return Array.from({length: 10}, () => (
         {
             value: Math.ceil(Math.random() * 6), 
             isHeld: false, 
