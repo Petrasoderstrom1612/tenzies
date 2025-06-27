@@ -3,22 +3,19 @@ import Die from "./components/Die"
 import { nanoid } from "nanoid"
 import DropConfetti from './components/DropConfetti'
 
-
-const createAllDice = () => { //create an array of objects
-    return Array.from({length: 10}, () => (
-        {
-            value: Math.ceil(Math.random() * 6), 
-            isHeld: false, 
-            id: nanoid()
-        }
-    )) //you need {} to declare length. It says create an array of 10 elements and pass a function to call on every element of the array
-}
-
-console.log("id",createAllDice())
-
 function App() {
-    const [dice, setdice] = React.useState(createAllDice)
+    const createAllDice = () => { //create an array of objects
+        return Array.from({length: 2}, () => (
+            {
+                value: Math.ceil(Math.random() * 6), 
+                isHeld: false, 
+                id: nanoid()
+            }
+        )) //you need {} to declare length. It says create an array of 10 elements and pass a function to call on every element of the array
+    }
     
+    const [dice, setdice] = React.useState(() => createAllDice())
+
     const toggleHold = (id) => { //loop through the array of objects from state, if the clicked index is the same as index of the object in state, toggle its held property
         setdice(prevState => prevState.map((oneDie) => {
             return id ===  oneDie.id ? {...oneDie, isHeld: !oneDie.isHeld} : oneDie
@@ -26,12 +23,12 @@ function App() {
     }    
     
     const rollDice = () => {   //loop through the array of objects from state and check each .isHeld and toggle the one clicked object's .isHeld
+        if(gameWon){ //restart the game by setting isHeld to false on all dice
+            setdice(createAllDice())
+        }
         setdice(prevValue => prevValue.map(oneDie => { //if you want to skip curlies, remove return too
             return !oneDie.isHeld ? {...oneDie, value: Math.ceil(Math.random() * 6)} :  oneDie
         }))
-        if(gameWon){ //restart the game by setting isHeld to false on all dice
-            setdice(dice.map(oneDie => ({...oneDie, isHeld: false})))
-        }
     }
     
     let gameWon = dice.every(die => die.isHeld) && dice.every(die => die.value === dice[0].value)
@@ -45,7 +42,8 @@ function App() {
     <>
     <main>
         <div className="big-box">
-            {gameWon && <DropConfetti />}
+            {gameWon && (<><DropConfetti /> <p aria-live="polite" className="sr-only">You won! Press "New Game" to start again</p></>)}
+            
             <h1 className="title">Tenzies</h1>
             <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
             <div className="dice-section">
