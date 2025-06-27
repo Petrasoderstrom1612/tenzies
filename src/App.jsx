@@ -29,21 +29,13 @@ function App() {
         setdice(prevValue => prevValue.map(oneDie => { //if you want to skip curlies, remove return too
             return !oneDie.isHeld ? {...oneDie, value: Math.ceil(Math.random() * 6)} :  oneDie
         }))
+        if(gameWon){ //restart the game by setting isHeld to false on all dice
+            setdice(dice.map(oneDie => ({...oneDie, isHeld: false})))
+        }
     }
     
     let gameWon = dice.every(die => die.isHeld) && dice.every(die => die.value === dice[0].value)
     let btnName = gameWon ? "New game" : "Roll"
-
-    const startNewGame = () => { //when the last die is clicked to be held, swap all back to isHeld: false
-        if(btnName === "New game"){
-            // setdice(dice.map(oneDie => ({...oneDie, isHeld: false})))
-            console.log("game won")
-        }
-    }
-    
-    startNewGame()
-
-    
 
     const allDice = dice.map((oneDie, index) => { //map through the state array and extract data - the properties + key + add props function
         return (<Die key={index} value={oneDie.value} isHeld={oneDie.isHeld} toggleHold={() => toggleHold(oneDie.id)}/>) //id comes from dice
