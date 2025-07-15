@@ -15,6 +15,7 @@ function App() {
     }
     
     const [dice, setdice] = React.useState(() => createAllDice())
+    const buttonAfterWin = React.useRef(null)
 
     const toggleHold = (id) => { //loop through the array of objects from state, if the clicked index is the same as index of the object in state, toggle its held property
         setdice(prevState => prevState.map((oneDie) => {
@@ -38,18 +39,22 @@ function App() {
         return (<Die key={index} value={oneDie.value} isHeld={oneDie.isHeld} toggleHold={() => toggleHold(oneDie.id)}/>) //id comes from dice
     })
     
+    React.useEffect(() =>{
+        buttonAfterWin.current.focus()
+    },[gameWon])
+
     return (
     <>
     <main>
         <div className="big-box">
-            {gameWon && (<><DropConfetti /> <p aria-live="polite" className="sr-only">You won! Press "New Game" to start again</p></>)}
-            
+            {gameWon && <DropConfetti />}
+            <p aria-live="polite" className="sr-only">{gameWon ? `You won! Press "New Game" to start again` : "You still have not won. Keep playing."}</p>
             <h1 className="title">Tenzies</h1>
             <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
             <div className="dice-section">
                 {allDice}
             </div>
-            <button onClick={rollDice} className="roll-dice">{btnName}</button>
+            <button onClick={rollDice} className="roll-dice" ref={buttonAfterWin}>{btnName}</button>
         </div>
     </main>
     </>
